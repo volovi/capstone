@@ -2,6 +2,8 @@
     "use strict";
 
     angular
-        .module("spa-demo", 
-        	["ui.router"]);
+        .module("spa-demo", [
+        	"ui.router",
+        	"spa-demo.cities"
+        ]);
 })();
