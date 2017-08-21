@@ -6,7 +6,7 @@
         .directive("sdCities", CitiesDirective);
         //sd-cities
 
-    CitiesDirective.$inject = ["spa-demo.APP_CONFIG"];
+    CitiesDirective.$inject = ["spa-demo.config.APP_CONFIG"];
 
     /* @ngInject */
     function CitiesDirective(APP_CONFIG) {

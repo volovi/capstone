@@ -5,7 +5,7 @@
         .module("spa-demo.cities")
         .factory("spa-demo.cities.City", CityFactory);
 
-    CityFactory.$inject = ["$resource", "spa-demo.APP_CONFIG"];
+    CityFactory.$inject = ["$resource", "spa-demo.config.APP_CONFIG"];
 
     /* @ngInject */
     function CityFactory($resource, APP_CONFIG) {
