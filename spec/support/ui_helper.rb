@@ -87,7 +87,6 @@ module UiHelper
     end
   end
 
-
   def apply_admin account
     User.find(account.symbolize_keys[:id]).roles.create(:role_name=>Role::ADMIN)
     return account
