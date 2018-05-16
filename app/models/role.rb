@@ -10,5 +10,7 @@ class Role < ActiveRecord::Base
     where("mname is null or (mname=:mname and (mid is null or mid=:mid))", 
       :mname=>model_name, :mid=>model_id)
   }
+
+  scope :application, ->(){ where("mid is null") }
   
 end
