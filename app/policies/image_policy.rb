@@ -14,6 +14,9 @@ class ImagePolicy < ApplicationPolicy
   def destroy?
     organizer_or_admin?
   end
+  def get_things?
+    true
+  end
 
   class Scope < Scope
     def user_roles

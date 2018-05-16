@@ -29,9 +29,7 @@ module ApiHelper
     jpost user_session_path, credentials.slice(:email, :password)
     expect(response).to have_http_status(status)
     payload = parsed_body
-    if response.ok?
-      payload["data"]
-    end
+    return response.ok? ? parsed_body["data"] : parsed_body
   end
 
   def logout status=:ok
@@ -83,10 +81,11 @@ end
 
 RSpec.shared_examples "resource index" do |model|
   let!(:resources) { (1..5).map {|idx| FactoryGirl.create(model) } }
+  let!(:apply_roles) { apply_organizer user, resources }
   let(:payload) { parsed_body }
 
   it "returns all #{model} instances" do
-    get send("#{model}s_path"), {}, {"Accept"=>"application/json"}
+    jget send("#{model}s_path"), {}, {"Accept"=>"application/json"}
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json")
 
@@ -97,18 +96,19 @@ end
 
 RSpec.shared_examples "show resource" do |model|
   let(:resource) { FactoryGirl.create(model) }
+  let!(:apply_roles) { apply_organizer user, resource }
   let(:payload) { parsed_body }
   let(:bad_id) { 1234567890 }
 
   it "returns #{model} when using correct ID" do
-    get send("#{model}_path", resource.id)
+    jget send("#{model}_path", resource.id)
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json")
     response_check if respond_to?(:response_check)
   end
 
   it "returns not found when using incorrect ID" do
-    get send("#{model}_path", bad_id)
+    jget send("#{model}_path", bad_id)
     expect(response).to have_http_status(:not_found)
     expect(response.content_type).to eq("application/json") 
 

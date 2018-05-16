@@ -18,6 +18,26 @@ class ThingPolicy < ApplicationPolicy
   def destroy?
     organizer_or_admin?
   end
+  
+  def get_linkables?
+    true
+  end
+
+  def get_images?
+    true
+  end
+
+  def add_image?
+    member_or_organizer?
+  end
+
+  def update_image?
+    organizer?
+  end
+
+  def remove_image?
+    organizer_or_admin?
+  end
 
   class Scope < Scope
     def user_roles members_only=true

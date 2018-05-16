@@ -66,7 +66,7 @@ RSpec.describe "Authentication Api", type: :request do
       get authn_checkme_path
       #pp parsed_body
       expect(response).to have_http_status(:unauthorized)
-      expect(parsed_body).to include("errors"=>["You need to sign in or sign up before continuing."])
+      expect(parsed_body).to include("errors"=>["Authorized users only."])
     end
   end
 
