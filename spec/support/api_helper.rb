@@ -28,7 +28,6 @@ module ApiHelper
   def login credentials, status=:ok
     jpost user_session_path, credentials.slice(:email, :password)
     expect(response).to have_http_status(status)
-    payload = parsed_body
     return response.ok? ? parsed_body["data"] : parsed_body
   end
 
@@ -134,7 +133,7 @@ RSpec.shared_examples "create resource" do |model|
     response_check if respond_to?(:response_check)
 
     # verify we can locate the created instance in DB
-    get send("#{model}_path", resource_id)
+    jget send("#{model}_path", resource_id)
     expect(response).to have_http_status(:ok)
   end
 end
