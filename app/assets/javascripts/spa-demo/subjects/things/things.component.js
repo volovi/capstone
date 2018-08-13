@@ -46,6 +46,7 @@
     vm.remove  = remove;
     vm.haveDirtyLinks = haveDirtyLinks;
     vm.updateImageLinks = updateImageLinks;
+    vm.viewMembers = viewMembers;
 
     vm.$onInit = function() {
       console.log("ThingEditorController",$scope);
@@ -104,6 +105,10 @@
     function clear() {
       newResource();
       $state.go(".",{id: null});    
+    }
+
+    function viewMembers() {
+      $state.go("thingMembers",{thing_id:vm.item.id});    
     }
 
     function update() {      

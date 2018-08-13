@@ -45,3 +45,10 @@
 //= require spa-demo/subjects/things/things_authz.service
 //= require spa-demo/subjects/things/things_authz.directive
 //= require spa-demo/subjects/things/things.component
+
+//= require spa-demo/subjects/thing_members/thing_members.service
+//= require spa-demo/subjects/thing_members/thing_members_authz.service
+//= require spa-demo/subjects/thing_members/thing_members_authz.directive
+//= require spa-demo/subjects/thing_members/thing_members.component
+
+//= require spa-demo/subjects/roles/roles.service

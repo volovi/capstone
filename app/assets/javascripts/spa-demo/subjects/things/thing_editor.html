@@ -110,6 +110,10 @@
       <button name="image-clear"
               type="submit"
               ng-click="$ctrl.clear()">Clear Thing</button>
+      <button name="thing-members"
+              type="submit"
+              ng-show="$ctrl.authz.canAddImage" 
+              ng-click="$ctrl.viewMembers()">View Thing Members</button>
     </div>
   </div>
 </form>

@@ -66,7 +66,8 @@
       vm.authz.canDelete     = ThingsAuthz.canDelete(item);
       vm.authz.canGetDetails = ThingsAuthz.canGetDetails(item);
       vm.authz.canUpdateImage = ThingsAuthz.canUpdateImage(item);
-      vm.authz.canRemoveImage = ThingsAuthz.canRemoveImage(item);      
+      vm.authz.canRemoveImage = ThingsAuthz.canRemoveImage(item);
+      vm.authz.canAddImage = ThingsAuthz.canAddImage(item);      
       console.log("checkAccess", item, vm.authz);
     }
 

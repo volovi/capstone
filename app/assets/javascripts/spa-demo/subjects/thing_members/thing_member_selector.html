@@ -1,0 +1,30 @@
+<form class="thing-members-form" name="thingmembersform">
+  <span class="thing_id id">{{$ctrl.item.id}}</span>
+  <span class="invalid">{{$ctrl.errors.full_messages}}</span>
+  
+  <div class="thing-member-list">
+    <ul>
+      <li ng-repeat="tm in $ctrl.items | orderBy:'name'">
+        <input type="checkbox"               
+               name="thing-members-member"
+               ng-disabled="tm.currentUser"
+               ng-model="tm.member"
+               ng-show="$ctrl.authz.canUpdateItem($ctrl.item)">
+        <div class="glyphicon glyphicon-asterisk"
+             ng-hide="tm.originalMember==tm.member"></div>
+        {{tm.name}} 
+      </li>
+    </ul>
+    <!--span class="invalid">{{$ctrl.item.errors.members}}</span-->
+  </div>
+  <div class="thing-members-controls">
+    <button name="thing-members-update"
+            type="submit"
+            ng-disabled="!$ctrl.haveDirtyAssignments()"
+            ng-show="$ctrl.authz.canUpdateItem($ctrl.item)"
+            ng-click="$ctrl.update()">Assign Thing Members</button>
+    <button name="image-clear"
+            type="submit"
+            ng-click="$ctrl.clear()">Back to {{$ctrl.item.name}}</button>
+  </div>
+</form>
