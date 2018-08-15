@@ -21,10 +21,11 @@
     <button name="thing-members-update"
             type="submit"
             ng-disabled="!$ctrl.haveDirtyAssignments()"
-            ng-show="$ctrl.authz.canUpdateItem($ctrl.item)"
+            ng-show="$ctrl.authz.canUpdateItem($ctrl.item) && $ctrl.items.length>0"
             ng-click="$ctrl.update()">Assign Thing Members</button>
     <button name="image-clear"
             type="submit"
+            ng-show="$ctrl.items.length>0"
             ng-click="$ctrl.clear()">Back to {{$ctrl.item.name}}</button>
   </div>
 </form>
