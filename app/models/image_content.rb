@@ -1,6 +1,7 @@
 class ImageContent
-  CONTENT_TYPES = ["image/jpeg", "image/jpg"]
-
+  CONTENT_TYPES=["image/jpeg", "image/jpg"]
+  MAX_CONTENT_SIZE=10*1000*1024
+  
   include Mongoid::Document
   field :image_id, type: Integer
   field :width, type: Integer
@@ -8,6 +9,23 @@ class ImageContent
   field :content_type, type: String
   field :content, type: BSON::Binary
   field :original, type: Mongoid::Boolean
+
+  validates_presence_of :image_id, :height, :width, :content_type, :content
+  validate :validate_height_width, :validate_content_length
+
+  def validate_height_width
+    if ( !width || !height ) && content
+      unless (CONTENT_TYPES.include? content_type)
+        self.errors.add(:content_type, "[#{content_type}] not supported type #{CONTENT_TYPES}")
+      end
+    end
+  end
+
+  def validate_content_length
+    if (content && content.data.size > MAX_CONTENT_SIZE)
+      self.errors.add(:content, "[#{content.data.size}] too large, greater than max #{MAX_CONTENT_SIZE}")
+    end
+  end
 
   def content=(value)
     if self[:content]
