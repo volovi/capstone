@@ -22,7 +22,7 @@ RSpec.describe "ImageContents", type: :request do
       image=Image.find(parsed_body["id"])
       get image_content_path(image.id)   #no need for credentials
       expect(response).to have_http_status(:ok)
-      #pp response.header
+      pp response.header
       expect(response.header["content-transfer-encoding"]).to eq("binary")
       expect(response.header["content-type"]).to eq("image/jpg")
       expect(response.header["content-disposition"]).to include("inline")
