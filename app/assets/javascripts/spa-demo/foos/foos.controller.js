@@ -51,6 +51,7 @@
         vm.foo.$update()
           .then(function(response){
             //console.log(response);
+            newFoo();
         })
         .catch(handleError);        
       }
