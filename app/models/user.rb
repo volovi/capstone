@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
           #:confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  belongs_to :image, dependent: :destroy
   has_many :roles, inverse_of: :user, dependent: :destroy
 
   def has_role(role_list, mname=nil, mid=nil) 
