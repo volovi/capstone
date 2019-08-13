@@ -9,7 +9,7 @@ class ImagesController < ApplicationController
 
   def index
     authorize Image
-    @images = policy_scope(Image.all)
+    @images = policy_scope(Image.except_user_images)
     @images = ImagePolicy.merge(@images)
   end
 
