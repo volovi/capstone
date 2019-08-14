@@ -8,7 +8,8 @@
   <div class="whoami-user">
     <button ng-click="idVM.whoAmI()">whoAmI() says...</button>
     <label>{{idVM.server.whoAmI}}</label>
-    <div ng-if="idVM.server.whoAmI.image_url"><img
+    <div id="user_image" style="margin-bottom:6px"
+         ng-if="idVM.server.whoAmI.image_url"><img class="img-thumbnail"
          ng-src="{{idVM.server.whoAmI.image_url}}"></div>
   </div>
   <div class="checkme-user">
