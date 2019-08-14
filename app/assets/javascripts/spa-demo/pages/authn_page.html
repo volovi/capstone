@@ -8,10 +8,11 @@
   <div class="whoami-user">
     <button ng-click="idVM.whoAmI()">whoAmI() says...</button>
     <label>{{idVM.server.whoAmI}}</label>
+    <div ng-if="idVM.server.whoAmI.image_url"><img
+         ng-src="{{idVM.server.whoAmI.image_url}}"></div>
   </div>
   <div class="checkme-user">
     <button ng-click="idVM.checkMe()">checkMe() says...</button>
     <label>{{idVM.server.checkMe}}</label>
   </div>
-
 </div>
