@@ -46,6 +46,9 @@
           ng-if="$ctrl.getCurrentUser()">{{$ctrl.getCurrentUser().id}}</span>
 
     <div id="logout-identity">
+      <div id="user_image" style="margin-bottom:6px"
+           ng-if="$ctrl.getCurrentUser().image_id"><img class="img-thumbnail"
+           ng-src="/api/images/{{$ctrl.getCurrentUser().image_id}}/content?width=100"></div>
       <label>{{$ctrl.getCurrentUserName()}}</label>
       <button type="submit" 
               name="logout_submit"
