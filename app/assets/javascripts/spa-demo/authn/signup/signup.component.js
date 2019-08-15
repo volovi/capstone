@@ -14,31 +14,57 @@
     return APP_CONFIG.authn_signup_html;
   }    
 
-  SignupController.$inject = ["$scope","$state","spa-demo.authn.Authn"];
-  function SignupController($scope, $state, Authn) {
+  SignupController.$inject = ["$scope","$state",
+                              "spa-demo.authn.Authn",
+                              "spa-demo.layout.DataUtils",
+                              "spa-demo.subjects.Image"];
+  function SignupController($scope, $state, Authn, DataUtils, Image) {
     var vm=this;
     vm.signupForm = {}
     vm.signup = signup;
+    vm.setImageContent = setImageContent;
 
     vm.$onInit = function() {
       console.log("SignupController",$scope);
+      vm.item = new Image();
     }
     return;
     //////////////
+    function setImageContent(dataUri) {
+      console.log("setImageContent", dataUri ? dataUri.length : null);
+      vm.item.image_content = DataUtils.getContentFromDataUri(dataUri);
+    }
+
     function signup() {
       console.log("signup...");
-      $scope.signup_form.$setPristine();
-      Authn.signup(vm.signupForm).then(
-        function(response){
-          vm.id = response.data.data.id;
-          console.log("signup complete", response.data, vm);          
+
+      if (vm.id) {
+        $state.go("home");
+        return;
+      }
+
+      Authn.signup(vm.signupForm)
+        .then(uploadImage)
+        .catch(handleError)
+        .then(function(response){
           $state.go("home");
-        },
-        function(response){
-          vm.signupForm["errors"]=response.data.errors;
-          console.log("signup failure", response, vm);          
-        }
-      );
+        });
+    }
+
+    function uploadImage(response) {
+      vm.id = response.data.data.id;
+      console.log("signup complete", response.data, vm);
+      if (vm.item.image_content) {
+        vm.item.user_id = vm.id;
+        return vm.item.$save();
+      }
+    }
+
+    function handleError(response) {
+      vm.signupForm["errors"]=response.data.errors;
+      console.log("failure", response, vm);
+      $scope.signup_form.$setPristine();
+      throw new Error();
     }
 
   }
