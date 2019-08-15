@@ -43,10 +43,15 @@ class ImagesController < ApplicationController
       if @image.save
         original=ImageContent.new(image_content_params)
         contents=ImageContentCreator.new(@image, original).build_contents
-        if (contents.save!) 
-          role=current_user.add_role(Role::ORGANIZER, @image)
-          @image.user_roles << role.role_name
-          role.save!
+        if contents.save!
+          if user_image?
+            current_user.image = @image
+            current_user.save!
+          else
+            role=current_user.add_role(Role::ORGANIZER, @image)
+            @image.user_roles << role.role_name
+            role.save!
+          end
           render :show, status: :created, location: @image
         end
       else
@@ -88,6 +93,10 @@ class ImagesController < ApplicationController
         ic.require(:content_type)
         ic.require(:content)
       }.permit(:content_type, :content)
+    end
+
+    def user_image?
+      params[:user_id] == current_user.id
     end
 
     def contents_error exception
