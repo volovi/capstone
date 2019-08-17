@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'authn/whoami', defaults: {format: :json}
   get 'authn/checkme'
 
-  mount_devise_token_auth_for 'User', at: 'auth'
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+    sessions: 'overrides/sessions',
+    token_validations: 'overrides/token_validations'
+  }
 
   scope :api, defaults: {format: :json}  do 
     resources :foos, except: [:new, :edit]

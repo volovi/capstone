@@ -14,6 +14,8 @@
     service.getCurrentUser = getCurrentUser;
     service.getCurrentUserName = getCurrentUserName;
     service.getCurrentUserId = getCurrentUserId;
+    service.getCurrentUserImage = getCurrentUserImage;
+    service.validateUser = validateUser;
     service.login = login;
     service.logout = logout;
 
@@ -21,6 +23,9 @@
     return;
     ////////////////
     function activate() {
+      service.validateUser();
+    }
+    function validateUser() {
       $auth.validateUser().then(
         function(user){
           service.user = user;
@@ -38,6 +43,9 @@
     }
     function getCurrentUserId() {
       return service.user!=null ? service.user.id : null;
+    }
+    function getCurrentUserImage() {
+      return service.user!=null ? service.user.image_url : null;
     }
     function getCurrentUser() {
       return service.user;
@@ -83,5 +91,6 @@
         });
       return result;
     }
+
   }
 })();

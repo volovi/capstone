@@ -67,6 +67,14 @@ namespace :ptourist do
     ImageContentCreator.new(img[:image], original_content).build_contents.save!
   end
 
+  def create_user_image user, idx
+    puts "creating image for #{user.name}"
+    img = {:path=>"db/bta/hpm-00#{idx%9+1}.jpg"}
+    image = Image.create(creator_id: user.id)
+    create_image_content(img.merge(:image=>image))
+    user.update(:image=>image)
+  end
+
   def create_thing thing, organizer, members, images
     thing=Thing.create!(thing)
     organizer.add_role(Role::ORGANIZER, thing).save
@@ -131,6 +139,12 @@ namespace :ptourist do
   desc "reset things, images, and links" 
   task subjects: [:users] do
     puts "creating things, images, and links"
+
+    puts "creating user images"
+
+    User.all.each_with_index do |user, idx|
+      create_user_image user, idx
+    end
 
     thing={:name=>"B&O Railroad Museum",
     :description=>"Discover your adventure at the B&O Railroad Museum in Baltimore, Maryland. Explore 40 acres of railroad history at the birthplace of American railroading. See, touch, and hear the most important American railroad collection in the world! Seasonal train rides for all ages.",

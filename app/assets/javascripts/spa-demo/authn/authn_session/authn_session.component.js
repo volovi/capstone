@@ -22,6 +22,7 @@
     vm.logout = logout;
     vm.getCurrentUser = Authn.getCurrentUser;
     vm.getCurrentUserName = Authn.getCurrentUserName;    
+    vm.getCurrentUserImage = Authn.getCurrentUserImage;
 
     vm.$onInit = function() {
       console.log("AuthnSessionController",$scope);

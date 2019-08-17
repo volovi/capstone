@@ -23,6 +23,7 @@
     vm.signupForm = {}
     vm.signup = signup;
     vm.setImageContent = setImageContent;
+    vm.button_text = "Sign Up";
 
     vm.$onInit = function() {
       console.log("SignupController",$scope);
@@ -38,7 +39,7 @@
     function signup() {
       console.log("signup...");
 
-      if (vm.id) {
+      if (vm.button_text == "Skip") {
         $state.go("home");
         return;
       }
@@ -46,9 +47,14 @@
       Authn.signup(vm.signupForm)
         .then(uploadImage)
         .catch(handleError)
-        .then(function(response){
-          $state.go("home");
-        });
+        .then(goHome);
+
+    }
+
+    function goHome(response) {
+      console.log("response: ", response);
+      Authn.validateUser();
+      $state.go("home");
     }
 
     function uploadImage(response) {
@@ -63,6 +69,10 @@
     function handleError(response) {
       vm.signupForm["errors"]=response.data.errors;
       console.log("failure", response, vm);
+      if (vm.id) {
+        vm.button_text = "Skip";
+        Authn.validateUser();
+      }
       $scope.signup_form.$setPristine();
       throw new Error();
     }
