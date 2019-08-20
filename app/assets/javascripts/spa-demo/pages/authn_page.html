@@ -4,11 +4,14 @@
   <div class="client-user">
     <button ng-click="idVM.getClientUser()">$auth says...</button>
     <label>{{idVM.client}}</label>
+    <div style="margin-bottom:6px"
+         ng-if="idVM.client.currentUser.image_url"><img class="img-thumbnail"
+         ng-src="{{idVM.client.currentUser.image_url}}"></div>
   </div>
   <div class="whoami-user">
     <button ng-click="idVM.whoAmI()">whoAmI() says...</button>
     <label>{{idVM.server.whoAmI}}</label>
-    <div id="user_image" style="margin-bottom:6px"
+    <div style="margin-bottom:6px"
          ng-if="idVM.server.whoAmI.image_url"><img class="img-thumbnail"
          ng-src="{{idVM.server.whoAmI.image_url}}"></div>
   </div>
