@@ -1,0 +1,16 @@
+<h3>{{$ctrl.title}}</h3>
+<label>You can designate which images you want to exclude from the results {{$ctrl.exclude_ids()}}</label>
+<button ng-click="$ctrl.refresh()" class="btn btn-default">Apply</button>
+<button ng-click="$ctrl.reset()" class="btn btn-default">Reset</button>
+<ul class="items geo-images">
+  <li ng-repeat="img in $ctrl.images">
+      <img ng-src="{{img.content_url}}?width=50" style="width:50px"/>
+      <input type="checkbox"
+              ng-model="$ctrl.toRemove[img.id]"/>
+      <div class="image-delete glyphicon glyphicon-remove"
+             ng-show="$ctrl.toRemove[img.id]"></div>
+      <span class="image_id id">{{img.id}}</span>
+      <span class="caption">{{img.caption}}</span>
+      <span class="distance" ng-if="img.distance!=null">({{img.distance | number:1}} miles)</span>
+  </li>
+</ul>

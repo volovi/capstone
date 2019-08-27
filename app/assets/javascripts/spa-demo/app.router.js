@@ -25,6 +25,10 @@
       url: "/authn",
       templateUrl: APP_CONFIG.authn_page_html
     })
+    .state("geoImages",{
+      url: "/geo_images",
+      templateUrl: APP_CONFIG.geo_images_page_html
+    })
     .state("images",{
       url: "/images/:id",
       templateUrl: APP_CONFIG.images_page_html
