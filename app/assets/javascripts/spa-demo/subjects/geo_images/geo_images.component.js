@@ -57,7 +57,7 @@
       return params;
     }
     function exclude_ids() {
-      return Object.keys(vm.toRemove);
+      return Object.keys(vm.toRemove).filter(function(key){return vm.toRemove[key];});
     }
     function reset() {
       vm.toRemove={};
