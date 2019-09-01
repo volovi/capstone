@@ -56,6 +56,9 @@
     this.tabs.push(tab);
   }
 
+  TabsController.prototype.removeTab = function(tab) {
+    this.tabs.splice(this.tabs.indexOf(tab), 1);
+  }
 
   TabController.$inject = ["$scope"];
   function TabController($scope) {
@@ -64,6 +67,10 @@
     vm.$onInit = function() {
       //console.log("TabController",$scope);
       vm.tabsController.addTab(vm);
+    }
+
+    vm.$onDestroy = function() {
+      vm.tabsController.removeTab(vm);
     }
     return;
     //////////////

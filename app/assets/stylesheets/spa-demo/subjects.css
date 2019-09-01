@@ -21,6 +21,11 @@ div.things-area {
   padding-right: 15px;
 }
 
+div.image-thing-page {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 /*********** subjects view ********/
 div.subjects-page {
   padding-left: 0px;

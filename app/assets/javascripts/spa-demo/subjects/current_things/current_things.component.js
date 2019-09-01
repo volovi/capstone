@@ -11,16 +11,27 @@
       templateUrl: thingInfoTemplateUrl,
       controller: CurrentThingInfoController,
     })
+    .component("sdRelatedThing", {
+      templateUrl: relatedThingTemplateUrl,
+      controller: RelatedThingController,
+      bindings: {
+        link: "<item"
+      }
+    })
     ;
 
   thingsTemplateUrl.$inject = ["spa-demo.config.APP_CONFIG"];
   function thingsTemplateUrl(APP_CONFIG) {
     return APP_CONFIG.current_things_html;
-  }    
+  }
   thingInfoTemplateUrl.$inject = ["spa-demo.config.APP_CONFIG"];
   function thingInfoTemplateUrl(APP_CONFIG) {
     return APP_CONFIG.current_thing_info_html;
-  }    
+  }
+  relatedThingTemplateUrl.$inject = ["spa-demo.config.APP_CONFIG"];
+  function relatedThingTemplateUrl(APP_CONFIG) {
+    return APP_CONFIG.related_thing_html;
+  }
 
   CurrentThingsController.$inject = ["$scope",
                                      "spa-demo.subjects.currentSubjects"];
@@ -76,12 +87,29 @@
         vm.thing=Thing.get({id:link.thing_id});
       }
     }
-
-
-
-
-
-
-
   }
+
+  RelatedThingController.$inject = ["$scope",
+                                    "spa-demo.subjects.Thing",
+                                    "spa-demo.authz.Authz"];
+  function RelatedThingController($scope, Thing, Authz) {
+    var vm=this;
+
+    vm.$postLink = function() {
+      $scope.$watch(
+        function() { return Authz.getAuthorizedUserId(); },
+        function() { newThing(vm.link); }
+      );
+    }
+
+    return;
+    //////////////
+    function newThing(link) {
+      vm.thing = null;
+      if (link && link.thing_id) {
+        vm.thing=Thing.get({id:link.thing_id});
+      }
+    }
+  }
+
 })();

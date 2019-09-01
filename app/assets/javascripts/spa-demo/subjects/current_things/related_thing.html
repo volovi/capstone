@@ -1,0 +1,18 @@
+<div class="thing-info">
+  <h4>{{$ctrl.link.thing_name}}</h4>
+  <span class="id image_id">{{$ctrl.link.image_id}}</span>
+  <span class="id thing_id">{{$ctrl.link.thing_id}}</span>
+  <p class="distance"
+       ng-if="$ctrl.link.distance">{{$ctrl.link.distance | number:1}} miles</p>
+
+  <img ng-src="{{$ctrl.link.image_content_url}}?width=250"
+       class="img-responsive img-circle" style="width:250px"/>
+  <p class="caption">{{$ctrl.link.image_caption}}</p>
+
+  <p>
+    <div class="description">{{$ctrl.thing.description}}</div>
+  </p>
+  <p>
+    <div class="notes">{{$ctrl.thing.notes}}</div>
+  </p>
+</div>

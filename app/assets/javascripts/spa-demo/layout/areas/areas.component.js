@@ -33,6 +33,18 @@
         }
       }
     }])
+    .directive("sdAreaRelatedThings", [function(){
+      return {
+        controller: AreaRelatedThingsController,
+        controllerAs: "relatedThingsVM",
+        bindToController: true,
+        restrict: "A",
+        scope: false,
+        require: {
+          area: "^sdArea"
+        }
+      }
+    }])
     ;
 
   areasTemplateUrl.$inject = ["spa-demo.config.APP_CONFIG"];
@@ -122,4 +134,32 @@
     }
   }
 
+  AreaRelatedThingsController.$inject = ["$scope" ,"spa-demo.subjects.currentSubjects"];
+  function AreaRelatedThingsController($scope, currentSubjects) {
+    var vm = this;
+    vm.items = [];
+
+    vm.$onInit = function() {
+      console.log("AreaThingsController", $scope);
+    }
+    vm.$postLink = function() {
+      $scope.$watch(
+        function() { return currentSubjects.getCurrentImage(); },
+        function(link) {
+          vm.items = [];
+          if (link && link.thing_id) {
+            vm.items = currentSubjects.getImages().filter(function(ti){
+              return ti.image_id===link.image_id;}).map(function(image){
+                return currentSubjects.getThings().find(function(thing){
+                  return image.thing_id===thing.thing_id;
+              });
+            });
+          }
+          vm.area.show = vm.items.length>0;
+        }
+      );
+    }
+    return;
+    /////////////////
+  }
 })();

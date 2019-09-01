@@ -62,7 +62,7 @@ div.areas-left, div.areas-right {
 }
 div.area-pane {
   position: relative;
-  border: 1px solid black;
+  border: 1px inset lightGrey;
 }
 div.area-pane input[type='checkbox'] {
   position: absolute;
