@@ -22,6 +22,7 @@ div.things-area {
 }
 
 /*********** subjects view ********/
+div.trip-stops-page,
 div.subjects-page {
   padding-left: 0px;
   padding-right: 0px;
@@ -57,11 +58,15 @@ div.thing-info .overlay:hover {
 }
 
 /*** map info windows ***/
+div.trip-marker-info span.id,
+div.stop-marker-info span.id,
 div.thing-marker-info span.id,
 div.image-marker-info span.id {
   display: none;
 }
 
+div.trip-marker-info img,
+div.stop-marker-info img,
 div.thing-marker-info img,
 div.image-marker-info img {
   width: 200px;

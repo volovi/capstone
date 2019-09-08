@@ -1,0 +1,67 @@
+<div class="trip-stops-page col-xs-12">
+  <sd-areas sd-areas-side>
+    <div class="areas-left"
+         ng-hide="sideVM.isHidden('left')"
+         ng-class="sideVM.isHidden('right') ?'col-sm-12':'col-sm-6 col-md-5 col-lg-4'">
+      <sd-area label="Trips"
+               position="left">
+
+        <sd-tabs>
+          <sd-tab label="Trips">
+            <sd-current-trips></sd-current-trips>
+          </sd-tab>
+
+          <sd-tab label="Stops">
+            <sd-current-stops></sd-current-stops>
+          </sd-tab>
+        </sd-tabs>
+
+      </sd-area>
+
+      <sd-area label="Details"
+               position="left">
+
+        <sd-tabs>
+          <sd-tab label="Trip">
+            <sd-current-trip-info></sd-current-trip-info>
+          </sd-tab>
+          <sd-tab label="Stop">
+              <sd-current-stop-viewer name="details-area"              
+                                      min-width="400">
+              </sd-current-stop-viewer>
+          </sd-tab>
+
+        </sd-tabs>
+
+      </sd-area>
+    </div>
+    <div class="areas-right"
+         ng-hide="sideVM.isHidden('right')"
+         ng-class="sideVM.isHidden('left') ? 'col-sm-12':'col-sm-6 col-md-7 col-lg-8'">
+      <sd-area label="Map"
+               position="right">
+
+        <sd-tabs>
+          <sd-tab label="Map">
+            <sd-current-trip-stops-map></sd-current-trip-stops-map>
+          </sd-tab>
+          <sd-tab label="Trips">
+            <sd-current-trips></sd-current-trips>
+          </sd-tab>
+          <sd-tab label="Stops">
+            <sd-current-stops></sd-current-stops>
+          </sd-tab>
+          <sd-tab label="Trip">
+              <sd-current-trip-info></sd-current-trip-info>
+          </sd-tab>
+          <sd-tab label="Stop">
+              <sd-current-stop-viewer name="map-area"
+                                       min-width="800">
+              </sd-current-stop-viewer>
+          </sd-tab>
+        </sd-tabs>
+
+      </sd-area>
+    </div> 
+  </sd-areas>
+</div>

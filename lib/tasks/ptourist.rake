@@ -89,6 +89,15 @@ namespace :ptourist do
     end
   end
 
+  def create_trip trip, creator, stops
+    trip=Trip.create!(trip)
+    stops.each do |s|
+      stop=Thing.find_by(:name=>s[:name])
+      TripThing.new(:trip=>trip, :stop=>stop, :creator_id=>creator.id)
+               .tap {|ts| ts.priority=s[:priority] if s[:priority]}.save!
+    end
+  end
+
   desc "reset all data"
   task reset_all: [:users,:subjects] do
   end
@@ -368,6 +377,46 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
      :lat=>39.2858057
      }
     create_image organizer, image
+
+    trip={:name=>"Trip 1", 
+      :description=>"Trip 1 description"}
+    creator=get_user("carol")
+    stops=[
+    {:name=>"Baltimore Water Taxi",
+     :priority=>0
+     },
+    {:name=>"National Aquarium",
+     },
+    {:name=>"Holiday Inn Timonium",
+     }
+    ]
+    create_trip trip, creator, stops
+
+    trip={:name=>"Trip 2", 
+      :description=>"Trip 2 description"}
+    creator=get_user("alice")
+    stops=[
+    {:name=>"Hyatt Place Baltimore",
+     :priority=>0
+     },
+    {:name=>"B&O Railroad Museum",
+     },
+    {:name=>"Rent-A-Tour",
+     }
+    ]
+    create_trip trip, creator, stops
+
+    trip={:name=>"Trip 3", 
+      :description=>"Trip 3 description"}
+    creator=get_user("alice")
+    stops=[
+    {:name=>"Holiday Inn Timonium",
+     :priority=>0
+     },
+    {:name=>"Rent-A-Tour",
+     }
+    ]
+    create_trip trip, creator, stops
 
     puts "#{Thing.count} things created and #{ThingImage.count("distinct thing_id")} with images"
     puts "#{Image.count} images created and #{ThingImage.count("distinct image_id")} for things"

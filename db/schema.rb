@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304202140) do
+ActiveRecord::Schema.define(version: 20190905104027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,28 @@ ActiveRecord::Schema.define(version: 20170304202140) do
 
   add_index "things", ["name"], name: "index_things_on_name", using: :btree
 
+  create_table "trip_things", force: :cascade do |t|
+    t.integer  "trip_id",                null: false
+    t.integer  "thing_id",               null: false
+    t.integer  "priority",   default: 5, null: false
+    t.integer  "creator_id",             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "trip_things", ["thing_id", "trip_id"], name: "index_trip_things_on_thing_id_and_trip_id", unique: true, using: :btree
+  add_index "trip_things", ["thing_id"], name: "index_trip_things_on_thing_id", using: :btree
+  add_index "trip_things", ["trip_id"], name: "index_trip_things_on_trip_id", using: :btree
+
+  create_table "trips", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "trips", ["name"], name: "index_trips_on_name", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
     t.string   "uid",                    default: "",      null: false
@@ -103,4 +125,6 @@ ActiveRecord::Schema.define(version: 20170304202140) do
   add_foreign_key "roles", "users"
   add_foreign_key "thing_images", "images"
   add_foreign_key "thing_images", "things"
+  add_foreign_key "trip_things", "things"
+  add_foreign_key "trip_things", "trips"
 end

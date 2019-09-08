@@ -1,0 +1,13 @@
+<ul class="items stops">
+  <li ng-repeat="ts in $ctrl.stops"
+      ng-class="{selected: $ctrl.isCurrentStop($index)}">
+    <a ng-click="$ctrl.stopClicked($index)">
+      <img ng-src="{{ts.image_content_url}}?width=100"/>      
+      <span class="id stop_id">{{ts.stop_id}}</span>
+      <span class="stop_name">{{ts.stop_name}}</span>
+      <span class="id trip_id" ng-if="ts.trip_id">{{ts.trip_id}}</span>
+      <span class="trip_name" ng-if="ts.trip_id">({{ts.trip_name}})</span>
+      <span class="distance" ng-if="ts.distance!=null">({{ts.distance | number:1}} miles)</span>
+    </a>
+  </li>
+</ul>
