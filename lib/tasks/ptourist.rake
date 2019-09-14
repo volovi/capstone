@@ -379,7 +379,7 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
     create_image organizer, image
 
     trip={:name=>"Trip 1", 
-      :description=>"Trip 1 description"}
+      :description=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
     creator=get_user("carol")
     stops=[
     {:name=>"Baltimore Water Taxi",
@@ -393,7 +393,7 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
     create_trip trip, creator, stops
 
     trip={:name=>"Trip 2", 
-      :description=>"Trip 2 description"}
+      :description=>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
     creator=get_user("alice")
     stops=[
     {:name=>"Hyatt Place Baltimore",
@@ -407,7 +407,7 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
     create_trip trip, creator, stops
 
     trip={:name=>"Trip 3", 
-      :description=>"Trip 3 description"}
+      :description=>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
     creator=get_user("alice")
     stops=[
     {:name=>"Holiday Inn Timonium",

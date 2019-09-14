@@ -27,32 +27,44 @@ div.subjects-page {
   padding-left: 0px;
   padding-right: 0px;
 }
-
+div.trip-info span.id,
+div.stop-info span.id,
 div.thing-info span.id {
   display: none;
 }
+div.trip-info,
+div.stop-info,
 div.thing-info {
   margin-left: 5px;
   position: relative;
 }
+div.trip-info .glyphicon,
+div.stop-info .glyphicon,
 div.thing-info .glyphicon {
   position: absolute;
   top: 60px;
   font-size: 5em;
 }
+div.trip-info .glyphicon-chevron-left,
+div.stop-info .glyphicon-chevron-left,
 div.thing-info .glyphicon-chevron-left {
   left: 10px;
 }
+div.trip-info .glyphicon-chevron-right,
+div.stop-info .glyphicon-chevron-right,
 div.thing-info .glyphicon-chevron-right {
   right: 10px;
 }
-
+div.trip-info .overlay,
+div.stop-info .overlay,
 div.thing-info .overlay {
   color: white;
   opacity: 0.0;
   z-index: 1002;  
   cursor: pointer;
 }
+div.trip-info .overlay:hover,
+div.stop-info .overlay:hover,
 div.thing-info .overlay:hover {
   opacity: 1;
 }

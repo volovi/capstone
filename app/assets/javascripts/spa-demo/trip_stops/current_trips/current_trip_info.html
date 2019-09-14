@@ -1,19 +1,16 @@
-<div class="thing-info">
-  <h4>{{$ctrl.link.thing_name}}</h4>
+<div class="trip-info">
+  <h4>{{$ctrl.link.trip_name}}</h4>
 
-  <span class="id thing_id">{{$ctrl.link.thing_id}}</span>
+  <span class="id trip_id">{{$ctrl.link.trip_id}}</span>
   <div class="distance" 
        ng-if="$ctrl.link.distance">{{$ctrl.link.distance | number:1}} miles</div>
   <p>
-    <div class="description">{{$ctrl.thing.description}}</div>
-  </p>
-  <p>
-    <div class="notes">{{$ctrl.thing.notes}}</div>
+    <div class="description">{{$ctrl.trip.description}}</div>
   </p>
 
   <span class="overlay glyphicon glyphicon-chevron-left"
-        ng-click="$ctrl.previousThing()"></span>
+        ng-click="$ctrl.previousTrip()"></span>
 
   <span class="overlay glyphicon glyphicon-chevron-right"
-        ng-click="$ctrl.nextThing()"></span>
+        ng-click="$ctrl.nextTrip()"></span>
 </div>

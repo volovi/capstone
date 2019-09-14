@@ -7,13 +7,9 @@
       templateUrl: stopsTemplateUrl,
       controller: CurrentStopsController,
     })
-    .component("sdCurrentImageViewerX", {
-      templateUrl: imageViewerTemplateUrl,
-      controller: CurrentImageViewerController,
-      bindings: {
-        name: "@",
-        minWidth: "@"
-      }
+    .component("sdCurrentStopInfo", {
+      templateUrl: stopInfoTemplateUrl,
+      controller: CurrentStopInfoController,
     })
     ;
 
@@ -21,10 +17,10 @@
   function stopsTemplateUrl(APP_CONFIG) {
     return APP_CONFIG.current_stops_html;
   }    
-  imageViewerTemplateUrl.$inject = ["spa-demo.config.APP_CONFIG"];
-  function imageViewerTemplateUrl(APP_CONFIG) {
-    return APP_CONFIG.current_image_viewer_html;
-  }    
+  stopInfoTemplateUrl.$inject = ["spa-demo.config.APP_CONFIG"];
+  function stopInfoTemplateUrl(APP_CONFIG) {
+    return APP_CONFIG.current_stop_info_html;
+  }
 
   CurrentStopsController.$inject = ["$scope",
                                     "spa-demo.tripStops.currentTripStops"];
@@ -49,30 +45,37 @@
     }
   }
 
-  CurrentImageViewerController.$inject = ["$scope",
-                                          "spa-demo.subjects.currentSubjects"];
-  function CurrentImageViewerController($scope, currentSubjects) {
+  CurrentStopInfoController.$inject = ["$scope",
+                                       "spa-demo.tripStops.currentTripStops",
+                                       "spa-demo.subjects.Thing",
+                                       "spa-demo.authz.Authz"];
+  function CurrentStopInfoController($scope,currentTripStops,Thing,Authz) {
     var vm=this;
-    vm.viewerIndexChanged = viewerIndexChanged;
+    vm.nextStop = currentTripStops.nextStop;
+    vm.previousStop = currentTripStops.previousStop;
 
     vm.$onInit = function() {
-      console.log("CurrentImageViewerController",$scope);
+      console.log("CurrentStopInfoController",$scope);
     }
     vm.$postLink = function() {
       $scope.$watch(
-        function() { return currentSubjects.getImages(); }, 
-        function(images) { vm.images = images; }
+        function() { return currentTripStops.getCurrentStop(); },
+        newStop
       );
       $scope.$watch(
-        function() { return currentSubjects.getCurrentImageIndex(); }, 
-        function(index) { vm.currentImageIndex = index; }
+        function() { return Authz.getAuthorizedUserId(); },
+        function() { newStop(currentTripStops.getCurrentStop()); }
       );
+
     }    
     return;
     //////////////
-    function viewerIndexChanged(index) {
-      console.log("viewer index changed, setting currentImage", index);
-      currentSubjects.setCurrentImage(index);
+    function newStop(link) {
+      vm.link = link;
+      vm.stop = null;
+      if (link && link.stop_id) {
+        vm.stop=Thing.get({id:link.stop_id});
+      }
     }
   }
 

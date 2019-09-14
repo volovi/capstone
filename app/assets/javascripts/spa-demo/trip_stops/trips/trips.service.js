@@ -2,12 +2,12 @@
   "use strict";
 
   angular
-    .module("spa-demo.subjects")
-    .factory("spa-demo.subjects.Thing", ThingFactory);
+    .module("spa-demo.tripStops")
+    .factory("spa-demo.tripStops.Trip", TripFactory);
 
-  ThingFactory.$inject = ["$resource","spa-demo.config.APP_CONFIG"];
-  function ThingFactory($resource, APP_CONFIG) {
-    var service = $resource(APP_CONFIG.server_url + "/api/things/:id",
+  TripFactory.$inject = ["$resource","spa-demo.config.APP_CONFIG"];
+  function TripFactory($resource, APP_CONFIG) {
+    var service = $resource(APP_CONFIG.server_url + "/api/trips/:id",
         { id: '@id'},
         { update: {method:"PUT"} }
       );

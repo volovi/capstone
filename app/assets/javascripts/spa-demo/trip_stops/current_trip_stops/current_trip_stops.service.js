@@ -27,6 +27,8 @@
     service.isCurrentTripIndex = isCurrentTripIndex;
     service.nextTrip = nextTrip;
     service.previousTrip = previousTrip;
+    service.nextStop = nextStop;
+    service.previousStop = previousStop;
 
     //refresh();
     $rootScope.$watch(function(){ return currentOrigin.getVersion(); }, refresh);
@@ -102,6 +104,20 @@
         service.setCurrentTrip(service.tripIdx - 1);
       } else if (service.trips.length >= 1) {
         service.setCurrentTrip(service.trips.length-1);
+      }
+    }
+    function nextStop() {
+      if (service.stopIdx !== null) {
+        service.setCurrentStop(service.stopIdx + 1);
+      } else if (service.stops.length >= 1) {
+        service.setCurrentStop(0);
+      }
+    }
+    function previousStop() {
+      if (service.stopIdx !== null) {
+        service.setCurrentStop(service.stopIdx - 1);
+      } else if (service.stops.length >= 1) {
+        service.setCurrentStop(service.stops.length-1);
       }
     }
   }

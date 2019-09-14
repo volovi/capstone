@@ -7,7 +7,7 @@
       templateUrl: tripsTemplateUrl,
       controller: CurrentTripsController,
     })
-    .component("sdCurrentTripInfoX", {
+    .component("sdCurrentTripInfo", {
       templateUrl: tripInfoTemplateUrl,
       controller: CurrentTripInfoController,
     })
@@ -48,7 +48,7 @@
   CurrentTripInfoController.$inject = ["$scope",
                                        "spa-demo.tripStops.currentTripStops",
                                        "spa-demo.tripStops.Trip"];
-  function CurrentTripInfoController($scope,currentTripStops, Trip) {
+  function CurrentTripInfoController($scope,currentTripStops,Trip) {
     var vm=this;
     vm.nextTrip = currentTripStops.nextTrip;
     vm.previousTrip = currentTripStops.previousTrip;

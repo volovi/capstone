@@ -70,6 +70,8 @@
 //= require spa-demo/subjects/current_things/current_things.component
 
 //= require spa-demo/trip_stops/trip_stops.module
+//= require spa-demo/trip_stops/trips/trips.service
+
 //= require spa-demo/trip_stops/current_trip_stops/current_trip_stops.service
 //= require spa-demo/trip_stops/current_trip_stops/current_trip_stops.component
 //= require spa-demo/trip_stops/current_trips/current_trips.component
