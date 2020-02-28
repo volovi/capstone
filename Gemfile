@@ -39,7 +39,7 @@ group :production do
 end
 
 gem 'pg', '0.19'
-gem 'puma', '~>3.6', '>=3.6.0', :platforms=>:ruby
+gem 'puma', '~>3.12', :platforms=>:ruby
 gem 'jbuilder', '~>2.0', '>=2.6.0'
 gem 'mongoid', '~>5.1', '>=5.1.5'
 gem 'database_cleaner', '~>1.5', '>=1.5.3'
